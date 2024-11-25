@@ -1,5 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import * as puppeteer from 'puppeteer';
+import * as puppeteer from 'puppeteer-core';
+import fs from 'fs';
+
+const chromiumPaths = ['/usr/bin/chromium', '/usr/bin/chromium-browser'];
 
 export type ScrapeReturn = {
   cards: {
@@ -20,7 +23,7 @@ export class AppService {
     const browser = await puppeteer.launch({
       headless: true,
       args: ['--no-sandbox', '--disable-setuid-sandbox'],
-      executablePath: '/usr/bin/chromium',
+      executablePath: chromiumPaths.find((path) => fs.existsSync(path)),
     });
 
     const page = await browser.newPage();

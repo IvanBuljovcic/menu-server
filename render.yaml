@@ -1,1 +1,10 @@
-apt-get update && apt-get install -y chromium
+services:
+  - type: web
+    name: puppeteer-app
+    env: node
+    buildCommand: |
+      apt-get update && apt-get install -y chromium
+      which chromium || which chromium-browser
+      ls -l /usr/bin/ | grep chromium
+      npm install
+    startCommand: npm run start
