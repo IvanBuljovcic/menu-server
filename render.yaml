@@ -3,8 +3,15 @@ services:
     name: puppeteer-app
     env: node
     buildCommand: |
-      apt-get update && apt-get install -y chromium
-      which chromium || which chromium-browser
-      ls -l /usr/bin/ | grep chromium
+      apt-get update && apt-get install -y \
+        chromium \
+        fonts-liberation \
+        libappindicator3-1 \
+        libatk-bridge2.0-0 \
+        libatspi2.0-0 \
+        libcups2 \
+        libxcomposite1 \
+        libxrandr2 \
+        xdg-utils
       npm install
     startCommand: npm run start
